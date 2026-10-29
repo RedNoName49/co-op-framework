@@ -42,6 +42,7 @@ func set_player_num(player_num: int) -> void:
 	set_player_position_based_on_num()
 
 
+
 func _physics_process(delta: float) -> void:
 	# input buffering
 	if Input.is_action_just_pressed(CoopInput.get_player(player_number).A):

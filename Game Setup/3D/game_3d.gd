@@ -1,6 +1,7 @@
 ## Extend this class to set up a 3D coop game!
 class_name Game3D extends Game
 
+
 func start(player_count: int, joined_players: Array[bool], _zoom_matching: bool) -> void:
 	var stored_players = []
 	

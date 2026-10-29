@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://c148d14s7v1ey"]
+
+[ext_resource type="Texture2D" uid="uid://dow7i3qardgdu" path="res://Cellar/Enemies/Assets/monster_sprites.png" id="1_1ti1u"]
+[ext_resource type="Script" uid="uid://cs7t1p26be6i5" path="res://Cellar/Enemies/Scripts/enemy.gd" id="1_2ftgn"]
+[ext_resource type="AudioStream" uid="uid://cic4a4we861as" path="res://Cellar/Enemies/Assets/monster_die.wav" id="2_7xj8c"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_afoyd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwi8k"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ousu"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p34wv"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(512, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgili"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(768, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yttr0"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(1024, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qsx5k"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q54g"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j27hp"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(512, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0st4m"]
+atlas = ExtResource("1_1ti1u")
+region = Rect2(768, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u8br5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwi8k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ousu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p34wv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sgili")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yttr0")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qsx5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q54g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j27hp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0st4m")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts7q4"]
+
+[sub_resource type="Curve" id="Curve_epg4t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99413496, 0.50892866), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_8h8ym"]
+curve = SubResource("Curve_epg4t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d0siw"]
+direction = Vector3(1, 90, 1)
+initial_velocity_min = -6.0
+initial_velocity_max = 6.0
+linear_accel_min = 3.9999976
+linear_accel_max = 3.9999976
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_8h8ym")
+turbulence_initial_displacement_min = 1.490116e-06
+turbulence_initial_displacement_max = 4.0000014
+collision_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_gh0et"]
+
+[node name="Enemy" type="CharacterBody3D" unique_id=755558196]
+collision_layer = 2
+collision_mask = 3
+script = ExtResource("1_2ftgn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1197837524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_afoyd")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="." unique_id=182183172]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15512, 0)
+pixel_size = 0.009
+billboard = 2
+sprite_frames = SubResource("SpriteFrames_u8br5")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="DeathSound" type="AudioStreamPlayer3D" parent="." unique_id=327209298]
+stream = ExtResource("2_7xj8c")
+unit_size = 2.0
+
+[node name="Blood" type="GPUParticles3D" parent="." unique_id=1865081704]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1528141, 0)
+material_override = SubResource("ShaderMaterial_ts7q4")
+emitting = false
+amount = 60
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.9
+process_material = SubResource("ParticleProcessMaterial_d0siw")
+draw_pass_1 = SubResource("QuadMesh_gh0et")
+
+[node name="GPUParticlesCollisionBox3D" type="GPUParticlesCollisionBox3D" parent="Blood" unique_id=556062891]
+transform = Transform3D(3.7508473, 0, 0, 0, 0.04529834, 0, 0, 0, 3.7508473, 0, -1.3334134, 0)

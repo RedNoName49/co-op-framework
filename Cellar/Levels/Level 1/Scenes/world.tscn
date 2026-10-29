@@ -1,0 +1,202 @@
+[gd_scene format=3 uid="uid://potr8w0bcnms"]
+
+[ext_resource type="Script" uid="uid://cfcex7nedf5bf" path="res://Game Setup/3D/game_3d.gd" id="1_m7h1x"]
+[ext_resource type="Script" uid="uid://okcxjlsvdusy" path="res://Cellar/Levels/Level 1/Scripts/world.gd" id="1_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://c148d14s7v1ey" path="res://Cellar/Enemies/Scenes/enemy.tscn" id="2_kofwd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qxgmw"]
+albedo_color = Color(0.423529, 0, 0.00392157, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pw2v5"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_d0siw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54xf7"]
+albedo_color = Color(0.109804, 1, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y2ikd"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5lueg"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="Environment" id="Environment_2bx7j"]
+background_mode = 1
+background_color = Color(0.643137, 0.643137, 0.643137, 1)
+
+[node name="Game3D" type="Node" unique_id=2104266446]
+script = ExtResource("1_m7h1x")
+PLAYER_SCENE = "uid://2go8h24o332j"
+metadata/_custom_type_script = "uid://cfcex7nedf5bf"
+
+[node name="World" type="Node3D" parent="." unique_id=2146592238]
+script = ExtResource("1_tlwt5")
+
+[node name="Environment" type="Node3D" parent="World" unique_id=597245007]
+
+[node name="Ground" type="MeshInstance3D" parent="World/Environment" unique_id=1817361385]
+transform = Transform3D(27.5909, 0, 0, 0, 1, 0, 0, 0, 21.6831, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_qxgmw")
+mesh = SubResource("PlaneMesh_pw2v5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Ground" unique_id=786689343]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.0000001, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Ground/StaticBody3D" unique_id=192464225]
+shape = SubResource("WorldBoundaryShape3D_d0siw")
+
+[node name="Block" type="MeshInstance3D" parent="World/Environment" unique_id=1115857358]
+transform = Transform3D(1.44593, 0, 0, 0, 4.70178, 0, 0, 0, 14.957405, -3.1372652, 0.429212, 4.0552)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block" unique_id=936744515]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block/StaticBody3D" unique_id=601528481]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block2" type="MeshInstance3D" parent="World/Environment" unique_id=214329386]
+transform = Transform3D(1.44593, 0, 0, 0, 4.70178, 0, 0, 0, 21.537119, 2.4352398, 0.42921, 5.9702)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block2" unique_id=423231774]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block2/StaticBody3D" unique_id=186436114]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block3" type="MeshInstance3D" parent="World/Environment" unique_id=62638580]
+transform = Transform3D(69.83441, 0, 0, 0, 4.70178, 0, 0, 0, 1.32646, 4.09057, 0.42921, -18.791805)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block3" unique_id=2121374246]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block3/StaticBody3D" unique_id=254909672]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block7" type="MeshInstance3D" parent="World/Environment" unique_id=579672314]
+transform = Transform3D(69.83441, 0, 0, 0, 4.70178, 0, 0, 0, 1.32646, 4.09057, 0.42921, 20.527847)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block7" unique_id=259866410]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block7/StaticBody3D" unique_id=200262112]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block6" type="MeshInstance3D" parent="World/Environment" unique_id=2076651215]
+transform = Transform3D(-0.96253204, 0, 1.326334, 0, 4.70178, 0, -69.82778, 0, -0.018282684, -27.823503, 0.42921, -8.809715)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block6" unique_id=942006424]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block6/StaticBody3D" unique_id=1132707536]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block8" type="MeshInstance3D" parent="World/Environment" unique_id=1120737426]
+transform = Transform3D(-0.96253204, 0, 1.326334, 0, 4.70178, 0, -69.82778, 0, -0.018282684, 26.703527, 0.42921, -8.809715)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block8" unique_id=1237493059]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block8/StaticBody3D" unique_id=2081927218]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block4" type="MeshInstance3D" parent="World/Environment" unique_id=328427888]
+transform = Transform3D(1.44593, 0, 0, 0, 4.70178, 0, 0, 0, 1.32646, -12.6588, 0.42921, -4.92068)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block4" unique_id=1553181140]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block4/StaticBody3D" unique_id=939053617]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="Block5" type="MeshInstance3D" parent="World/Environment" unique_id=1161357865]
+transform = Transform3D(-0.014404928, 0, 45.94501, 0, 4.70178, 0, -1.4027786, 0, -0.47180265, -1.81955, 0.42921, -11.292175)
+material_override = SubResource("StandardMaterial3D_54xf7")
+mesh = SubResource("BoxMesh_y2ikd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="World/Environment/Block5" unique_id=1048531747]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="World/Environment/Block5/StaticBody3D" unique_id=742806470]
+shape = SubResource("ConcavePolygonShape3D_5lueg")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=457756516]
+environment = SubResource("Environment_2bx7j")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World/WorldEnvironment" unique_id=1973639388]
+transform = Transform3D(0.810512, 0.337002, -0.479061, 0, 0.817899, 0.575362, 0.585722, -0.466338, 0.662917, 0, 8.42502, 0)
+shadow_enabled = true
+
+[node name="Enemy" parent="World" unique_id=755558196 instance=ExtResource("2_kofwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.785938, 0, -4)
+
+[node name="Enemy2" parent="World" unique_id=1513683528 instance=ExtResource("2_kofwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.6236, 0, -5.88845)
+
+[node name="Enemy3" parent="World" unique_id=765577972 instance=ExtResource("2_kofwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.002151, 0, 5.8224874)
+
+[node name="Enemy4" parent="World" unique_id=431938135 instance=ExtResource("2_kofwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.50648284, 0, -6.788521)
+
+[node name="Enemy5" parent="World" unique_id=459533657 instance=ExtResource("2_kofwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0119171, 0, -11.4769)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="World" unique_id=1334081817]
+
+[node name="WinScreen" type="Control" parent="World/CanvasLayer" unique_id=2035194718]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="World/CanvasLayer/WinScreen" unique_id=284143783]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -35.0
+offset_right = 52.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="World/CanvasLayer/WinScreen/Panel" unique_id=146213119]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -30.0
+offset_right = 37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Win"
+
+[node name="Button" type="Button" parent="World/CanvasLayer/WinScreen/Panel" unique_id=988948716]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -2.0
+offset_right = 32.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"

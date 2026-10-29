@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://b64clcg50kwor"]
-
-[ext_resource type="Script" uid="uid://dbfmr8rh3d1a1" path="res://Game Setup/2D/game_2d.gd" id="1_vtadi"]
-
-[node name="Game2D" type="Node" unique_id=2016494905]
-script = ExtResource("1_vtadi")
-PLAYER_SCENE = "uid://bia3e24u5peqj"
-metadata/_custom_type_script = "uid://dbfmr8rh3d1a1"

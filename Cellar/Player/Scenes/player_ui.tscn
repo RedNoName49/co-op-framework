@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://cq14l7wadbxad"]
+
+[ext_resource type="Texture2D" uid="uid://d25esf86lm4yo" path="res://Cellar/Player/Assets/gun_sprites.png" id="1_ilg0x"]
+[ext_resource type="Script" uid="uid://b6dychs3m0mmp" path="res://Cellar/Player/Scripts/player_ui.gd" id="1_su7k3"]
+[ext_resource type="AudioStream" uid="uid://d2gc6jyrlvp21" path="res://Cellar/Player/Assets/revolver_shot1.wav" id="3_cnp30"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jcqdb"]
+atlas = ExtResource("1_ilg0x")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf8j7"]
+atlas = ExtResource("1_ilg0x")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5lx7v"]
+atlas = ExtResource("1_ilg0x")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0btv"]
+atlas = ExtResource("1_ilg0x")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23jnc"]
+atlas = ExtResource("1_ilg0x")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2ouaf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jcqdb")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rf8j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5lx7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0btv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23jnc")
+}],
+"loop": 0,
+"name": &"shoot",
+"speed": 10.0
+}]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=1825288207]
+script = ExtResource("1_su7k3")
+
+[node name="GunBase" type="Control" parent="." unique_id=1695865811]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="GunBase" unique_id=252308712]
+position = Vector2(223, -86)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_2ouaf")
+animation = &"shoot"
+autoplay = "idle"
+frame = 3
+frame_progress = 1.0
+
+[node name="Crosshair" type="ColorRect" parent="." unique_id=840312783]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0.262745)
+metadata/_edit_use_anchors_ = true
+
+[node name="DeathScreen" type="Control" parent="." unique_id=295331600]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="DeathScreen" unique_id=1250989724]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -35.0
+offset_right = 52.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="DeathScreen/Panel" unique_id=1531094691]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -37.0
+offset_top = -30.0
+offset_right = 37.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You Died!"
+
+[node name="Button" type="Button" parent="DeathScreen/Panel" unique_id=2102734944]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.5
+offset_top = -2.0
+offset_right = 32.5
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="." unique_id=1398269552]
+stream = ExtResource("3_cnp30")

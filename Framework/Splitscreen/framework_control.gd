@@ -51,7 +51,7 @@ var in_3d: bool = false
 @export var splitscreen: bool = true
 ## When true: screen is split by a | (vertically) when playing with 2 players.
 ## When false: screen is split by a - (horizontally) when playing with 2 players.
-@export var vertical_2_player_splitscreen: bool = true
+@export var vertical_2_player_splitscreen: bool = false
 ## Set to 0 to remove black lines between screens entirely, or increase if you want bigger lines between screens.
 @export var splitscreen_line_thickness: int = 2
 ## If true, when playing a 2d splitscreen game, cameras will zoom out as the player count increases to prevent loss of visibility.
